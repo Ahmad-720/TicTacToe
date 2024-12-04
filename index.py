@@ -68,6 +68,16 @@ class View:
 
         self.display_buttons()
 
+        self.controller.reset_clicked()
+
+    def disable_remaining_buttons(self):
+        for ro in range(len(self.buttons)):
+            for co in range(len(self.buttons[ro])):
+                if type(self.buttons[ro][co]) is Button:
+                    self.buttons[ro][co].grid_forget()
+                    self.buttons[ro][co] = Button(self.root,padx=50,pady=45,state=DISABLED)
+                    self.buttons[ro][co].grid(row=ro,column=co,padx=5,pady=5)
+
     
 
 class Controller:
@@ -85,16 +95,30 @@ class Controller:
 
         self.model.button_clicked(i,self.player)
 
+        if self.model.winner is not None:
+            self.view.disable_remaining_buttons()
+            return
+
+
         if self.player == 'X':
             self.player = 'O'
         else:
             self.player = 'X'
+
+    def reset_clicked(self):
+        self.model.board = [['-','-','-'],['-','-','-'],['-','-','-']]
+
+        self.model.winner = None
+
+        self.player = "X"
     
 
 
 class Model:
     def __init__(self):
         self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
+
+        self.winner = None
 
     def button_clicked(self,i,player):
         if i >= 0 and i <= 2:
@@ -104,8 +128,41 @@ class Model:
         elif i >= 6 and i <= 8:
             self.board[2][i%6] = player
 
-        print(self.board)
+        if self.check_for_win(player):
+            self.winner = player
+
         
+    def check_for_win(self,player):
+        return self.check_rows(player) or self.check_columns(player) or self.check_diags(player)
+
+    def check_rows(self,player):
+        if self.board[0][0] == self.board[0][1] == self.board[0][2] == player:
+            return True
+        if self.board[1][0] == self.board[1][1] == self.board[1][2] == player:
+            return True
+        if self.board[2][0] == self.board[2][1] == self.board[2][2] == player:
+            return True
+        
+        return False
+    
+    def check_columns(self,player):
+        if self.board[0][0] == self.board[1][0] == self.board[2][0] == player:
+            return True
+        if self.board[0][1] == self.board[1][1] == self.board[2][1] == player:
+            return True
+        if self.board[0][2] == self.board[1][2] == self.board[2][2] == player:
+            return True
+        
+        return False
+    
+    def check_diags(self,player):
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] == player:
+            return True
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] == player:
+            return True
+        
+        return False
+
 
 
 view_ = View()
