@@ -1,12 +1,19 @@
 from tkinter import *
+from PIL import ImageTk,Image
 
 class View:
     def __init__(self):
         self.root = Tk()
         self.root.title("TicTacToe")
+        self.root.iconbitmap("pictures/tictactoe-icon.ico")
 
         self.reset_button = Button(self.root,text="RESET", bg="red",padx=20,pady=15,command=self.reset_clicked)
+
+        self.X_image = ImageTk.PhotoImage(Image.open("pictures/X.png"))
+        self.O_image = ImageTk.PhotoImage(Image.open("pictures/O.png"))
         
+        self.display_winner_label = Label(self.root)
+
         self.buttons = [[],[],[]]
 
         self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(0)))
@@ -41,13 +48,22 @@ class View:
 
     def set_label(self,i,player):
         if i >= 0 and i <= 2:
-            self.buttons[0][i] = Label(self.root,text=player,padx=50,pady=45,fg='black',bg="red")
+            if player == "X":
+                self.buttons[0][i] = Label(self.root,image=self.X_image)
+            else:
+                self.buttons[0][i] = Label(self.root,image=self.O_image)
             self.buttons[0][i].grid(row=0,column=i,padx=5,pady=5)
         elif i >= 3 and i <= 5:
-            self.buttons[1][i%3] = Label(self.root,text=player,padx=50,pady=45,fg='black',bg="red")
+            if player == "X":
+                self.buttons[1][i%3] = Label(self.root,image=self.X_image)
+            else:
+                self.buttons[1][i%3] = Label(self.root,image=self.O_image)
             self.buttons[1][i%3].grid(row=1,column=i%3,padx=5,pady=5)
         elif i >= 6 and i <= 8:
-            self.buttons[2][i%6] = Label(self.root,text=player,padx=50,pady=45,fg='black',bg="red")
+            if player == "X":
+                self.buttons[2][i%6] = Label(self.root,image=self.X_image)
+            else:
+                self.buttons[2][i%6] = Label(self.root,image=self.O_image)
             self.buttons[2][i%6].grid(row=2,column=i%6,padx=5,pady=5)
 
     def reset_clicked(self):
@@ -55,6 +71,8 @@ class View:
             self.remove_button(i)
         
         self.buttons = [[],[],[]]
+
+        self.display_winner_label.grid_forget()
 
         self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(0)))
         self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(1)))
@@ -78,6 +96,18 @@ class View:
                     self.buttons[ro][co] = Button(self.root,padx=50,pady=45,state=DISABLED)
                     self.buttons[ro][co].grid(row=ro,column=co,padx=5,pady=5)
 
+    def display_winner(self,winner):
+        phrase = None
+        if winner == "draw":
+            phrase = "it's a draw"
+        else:
+            phrase = f"{winner} Won!"
+
+        self.display_winner_label = Label(self.root,text=phrase)
+        self.display_winner_label.grid(row=1,column=3)
+
+
+
     
 
 class Controller:
@@ -97,6 +127,11 @@ class Controller:
 
         if self.model.winner is not None:
             self.view.disable_remaining_buttons()
+            self.view.display_winner(self.player)
+            return
+        
+        if self.model.check_for_draw():
+            self.view.display_winner("draw")
             return
 
 
@@ -162,6 +197,14 @@ class Model:
             return True
         
         return False
+    
+    def check_for_draw(self):
+        for ro in range(len(self.board)):
+            for co in range(len(self.board[ro])):
+                if self.board[ro][co] == '-':
+                    return False
+                
+        return True
 
 
 
