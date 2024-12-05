@@ -16,15 +16,15 @@ class View:
 
         self.buttons = [[],[],[]]
 
-        self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(0)))
-        self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(1)))
-        self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(2)))
-        self.buttons[1].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(3)))
-        self.buttons[1].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(4)))
-        self.buttons[1].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(5)))
-        self.buttons[2].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(6)))
-        self.buttons[2].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(7)))
-        self.buttons[2].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(8)))
+        self.buttons[0].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(0)))
+        self.buttons[0].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(1)))
+        self.buttons[0].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(2)))
+        self.buttons[1].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(3)))
+        self.buttons[1].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(4)))
+        self.buttons[1].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(5)))
+        self.buttons[2].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(6)))
+        self.buttons[2].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(7)))
+        self.buttons[2].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(8)))
 
         self.display_buttons()
         self.display_reset_button()
@@ -74,15 +74,15 @@ class View:
 
         self.display_winner_label.grid_forget()
 
-        self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(0)))
-        self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(1)))
-        self.buttons[0].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(2)))
-        self.buttons[1].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(3)))
-        self.buttons[1].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(4)))
-        self.buttons[1].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(5)))
-        self.buttons[2].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(6)))
-        self.buttons[2].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(7)))
-        self.buttons[2].append(Button(self.root,padx=50,pady=45,command=lambda:self.controller.button_clicked(8)))
+        self.buttons[0].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(0)))
+        self.buttons[0].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(1)))
+        self.buttons[0].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(2)))
+        self.buttons[1].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(3)))
+        self.buttons[1].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(4)))
+        self.buttons[1].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(5)))
+        self.buttons[2].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(6)))
+        self.buttons[2].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(7)))
+        self.buttons[2].append(Button(self.root,padx=48,pady=40,command=lambda:self.controller.button_clicked(8)))
 
         self.display_buttons()
 
